@@ -1,0 +1,26 @@
+# Design docs (private)
+/docs/
+
+# Build artifacts
+/target/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Rust
+Cargo.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large binary files (use Git LFS if needed)
+# *.pdf
