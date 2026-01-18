@@ -1,0 +1,24 @@
+[package]
+name = "build_n_fight"
+version = "0.1.0"
+edition = "2021"
+description = "Asymmetric underground warfare tower defense"
+license = "GPL-3.0-or-later"
+
+[dependencies]
+bevy = { version = "0.15", features = ["dynamic_linking"] }
+rand = "0.8"
+
+# Fast hash maps for tile lookups
+hashbrown = "0.14"
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+# Enable optimizations for release
+[profile.release]
+lto = "thin"
+codegen-units = 1

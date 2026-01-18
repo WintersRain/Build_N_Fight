@@ -2,7 +2,7 @@
 /docs/
 
 # Build artifacts
-/target/
+target/
 *.exe
 *.dll
 *.so
