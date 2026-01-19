@@ -5,6 +5,8 @@
 //! and assaults them from below.
 
 use bevy::prelude::*;
+use bevy::render::settings::{RenderCreation, WgpuSettings};
+use bevy::render::RenderPlugin as BevyRenderPlugin;
 
 mod ai;
 mod combat;
@@ -26,14 +28,24 @@ pub enum GameState {
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins.set(WindowPlugin {
-            primary_window: Some(Window {
-                title: "Build N' Fight".into(),
-                resolution: (1280., 720.).into(),
+        .add_plugins(DefaultPlugins
+            .set(WindowPlugin {
+                primary_window: Some(Window {
+                    title: "Build N' Fight".into(),
+                    resolution: (1280., 720.).into(),
+                    ..default()
+                }),
                 ..default()
-            }),
-            ..default()
-        }))
+            })
+            // Force Vulkan backend to avoid DX12 issues on Windows
+            .set(BevyRenderPlugin {
+                render_creation: RenderCreation::Automatic(WgpuSettings {
+                    backends: Some(bevy::render::settings::Backends::VULKAN),
+                    ..default()
+                }),
+                ..default()
+            })
+        )
         // Game state
         .init_state::<GameState>()
         // Core game plugins
